@@ -113,9 +113,3 @@ This project is released under the MIT License.
 
 ---
 
-## 🙌 Acknowledgements
-
-- Original SinGAN paper: *Shaham, Dekel, Michaeli – ICCV 2019*
-- GitHub repo adapted from: [tamarott/SinGAN](https://github.com/tamarott/SinGAN)
-
----
