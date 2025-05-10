@@ -77,7 +77,7 @@ python -m pip install -r requirements.txt
 
 ### 📁 Step 5: Add Input Files
 - Place input **images** in the `images/` folder  
-- Place **CSV files** in the `csv_data/` folder
+- Place **CSV files** in the `csv data/` folder
 
 ### 🏁 Step 6: Run the Model
 Use one of the following commands:
@@ -89,7 +89,7 @@ python generation/main.py --root "images/your_image.jpg"
 
 - **For CSV input:**
 ```bash
-python generation/main.py --root "csv_data/your_file.csv"
+python generation/main.py --root "csv data/your_file.csv"
 ```
 
 ### 🖼️ Step 7: View Results
