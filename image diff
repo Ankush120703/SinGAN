@@ -1,0 +1,54 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage.metrics import structural_similarity as ssim
+from skimage.metrics import mean_squared_error as mse
+import os
+
+# Paths to the images
+original_path = r'C:\Users\ankus\OneDrive\Desktop\SinGAN-master\images\A.png'
+generated_path = r'C:\Users\ankus\OneDrive\Desktop\SinGAN-master\images\s3800_fixed.png'
+
+# Load images
+original = cv2.imread(original_path)
+generated = cv2.imread(generated_path)
+
+# Check if both images loaded successfully
+if original is None or generated is None:
+    raise FileNotFoundError("Could not load one or both images. Check the paths.")
+
+# Resize original to match generated image size
+original_resized = cv2.resize(original, (generated.shape[1], generated.shape[0]))
+
+# Convert to grayscale for SSIM and MSE
+original_gray = cv2.cvtColor(original_resized, cv2.COLOR_BGR2GRAY)
+generated_gray = cv2.cvtColor(generated, cv2.COLOR_BGR2GRAY)
+
+# Calculate SSIM and MSE
+ssim_score = ssim(original_gray, generated_gray)
+mse_score = mse(original_gray, generated_gray)
+
+# Compute absolute difference (color)
+diff_image = cv2.absdiff(original_resized, generated)
+
+# Plotting
+plt.figure(figsize=(15, 5))
+
+plt.subplot(1, 3, 1)
+plt.title("Original (Resized)")
+plt.imshow(cv2.cvtColor(original_resized, cv2.COLOR_BGR2RGB))
+plt.axis('off')
+
+plt.subplot(1, 3, 2)
+plt.title("Generated")
+plt.imshow(cv2.cvtColor(generated, cv2.COLOR_BGR2RGB))
+plt.axis('off')
+
+plt.subplot(1, 3, 3)
+plt.title("Difference Image")
+plt.imshow(cv2.cvtColor(diff_image, cv2.COLOR_BGR2RGB))
+plt.axis('off')
+
+plt.suptitle(f'SSIM: {ssim_score:.4f} | MSE: {mse_score:.4f}', fontsize=14)
+plt.tight_layout()
+plt.show()
